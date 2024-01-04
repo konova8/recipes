@@ -1,0 +1,50 @@
+<html>
+
+<script>
+    function searchInUL() {
+        // Declare variables
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById('inputElement');
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("listRecipes");
+        li = ul.getElementsByTagName('li');
+
+        // Loop through all list items, and hide those who don't match the search query
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName("a")[0];
+            txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
+        }
+    }
+</script>
+
+
+<style>
+    #inputElement {
+        width: 100%;
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    #listRecipes {
+        font-size: 18px;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+</style>
+
+<body>
+    <input type="text" id="inputElement" onkeyup="searchInUL()" placeholder="Search for names..">
+    <ul id="listRecipes">
+        <li><a href="./ceci-al-curry">ceci-al-curry</a></li>
+        <li><a href="./tortino-al-cioccolato">tortino-al-cioccolato</a></li>
+        <li><a href="./zucca-e-cipolla-al-forno">zucca-e-cipolla-al-forno</a></li>
+    </ul>
+</body>
+
+</html>
