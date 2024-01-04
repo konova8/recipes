@@ -60,4 +60,6 @@ echo \
 
 </html>' >> ./index.html
 
+git add index.html
+
 exit 0
