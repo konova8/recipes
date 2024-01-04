@@ -1,4 +1,8 @@
-<html>
+#!/bin/sh
+
+# Clean Index
+echo \
+'<html>
 
 <script>
     function searchInUL() {
@@ -40,11 +44,20 @@
 
 <body>
     <input type="text" id="inputElement" onkeyup="searchInUL()" placeholder="Search for names..">
-    <ul id="listRecipes">
-        <li><a href="./ceci-al-curry">ceci-al-curry</a></li>
-        <li><a href="./tortino-al-cioccolato">tortino-al-cioccolato</a></li>
-        <li><a href="./zucca-e-cipolla-al-forno">zucca-e-cipolla-al-forno</a></li>
-    </ul>
+    <ul id="listRecipes">' > ./index.html
+
+# Generate index
+for f in ./*.md ./.*.md; do
+    n="$(basename $f)"
+    [ -f "$f" ] &&
+    echo '        <li><a href="'"${f%.md}"'">'"${n%.md}"'</a></li>' >> ./index.html
+done
+
+# Append closing tags
+echo \
+'    </ul>
 </body>
 
-</html>
+</html>' >> ./index.html
+
+exit 0
