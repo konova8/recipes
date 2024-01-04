@@ -8,12 +8,12 @@
 - Curry in polvere
 
 ## Procedimento
-Se gli spinaci sono congelati scongelali, altrimenti parti dai pomodorini.
-Tagliali e mettili in padella.
-Aggiungi un po' di pomodoro se ce l'hai.
-Aggiungi lattte e curry, poi gli spinaci.
-Lascia cuocere tutto per un po'.
-Aggiungi i ceci per ultimi.
+- Se gli spinaci sono congelati scongelali, altrimenti parti dai pomodorini.
+- Tagliali e mettili in padella.
+- Aggiungi un po' di pomodoro se ce l'hai.
+- Aggiungi lattte e curry, poi gli spinaci.
+- Lascia cuocere tutto per un po'.
+- Aggiungi i ceci per ultimi.
 
 ## Prova anche
 - La panna al posto del latte
