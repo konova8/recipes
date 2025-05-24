@@ -11,7 +11,8 @@
 
 ## Procedimento
 - In una ciotola metti il burro sciogliendolo a microonde
-- Aggiungi, in sequenza:
+- Aspetto che si raffreddi il burro mescolandolo per farlo finire di sciogliere
+- Aggiungi, in sequenza (mescolando dopo ogni ingrediente):
     - Tuorlo d'uovo
     - Latte
     - Lievito
