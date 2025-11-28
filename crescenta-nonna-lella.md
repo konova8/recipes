@@ -20,3 +20,7 @@
 - Riprendere la pasta e stenderla in una ruola unta di olio
 - Formare il reticolo e aggiungere ancora un po' di olio
 - Infornare a 200 gradi per 30 minuti
+
+## Note
+- Con "formare il reticolo" si intende incidere l'impasto una volta steso formando dei rombi
+- Le incisioni vanno fatte più o meno a 3cm l'una dall'altra
