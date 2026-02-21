@@ -1,64 +1,34 @@
 #!/bin/sh
 
-# Clean Index
-echo \
-'<html>
+# --- Update recipe cards in index.html between marker comments ---
+# Instead of regenerating the entire file, this replaces only the
+# <!-- RECIPES:START --> ... <!-- RECIPES:END --> block.
 
-<script>
-    function searchInUL() {
-        // Declare variables
-        var input, filter, ul, li, a, i, txtValue;
-        input = document.getElementById("inputElement");
-        filter = input.value.toUpperCase();
-        ul = document.getElementById("listRecipes");
-        li = ul.getElementsByTagName("li");
+# Build the new recipe list into a temp file
+TMPFILE=$(mktemp)
 
-        // Loop through all list items, and hide those who dont match the search query
-        for (i = 0; i < li.length; i++) {
-            a = li[i].getElementsByTagName("a")[0];
-            txtValue = a.textContent || a.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                li[i].style.display = "";
-            } else {
-                li[i].style.display = "none";
-            }
-        }
-    }
-</script>
+echo "<!-- RECIPES:START -->" > "$TMPFILE"
 
-
-<style>
-    #inputElement {
-        width: 100%;
-        font-size: 16px;
-        padding: 10px;
-    }
-
-    #listRecipes {
-        font-size: 18px;
-        margin: 0;
-        padding: 0;
-        text-align: center;
-    }
-</style>
-
-<body>
-    <input type="text" id="inputElement" onkeyup="searchInUL()" placeholder="Search for names..">
-    <ul id="listRecipes">' > ./index.html
-
-# Generate index
 for f in ./*.md ./.*.md; do
-    n="$(basename $f)"
-    [ -f "$f" ] &&
-    echo '        <li><a href="'"${f%.md}"'">'"${n%.md}"'</a></li>' >> ./index.html
+    [ -f "$f" ] || continue
+    n="$(basename "$f" .md)"
+    title="$(echo "$n" | tr '-' ' ')"
+    echo "            <li><a class=\"card\" href=\"${f%.md}\"><div class=\"card-icon\">🍲</div><div class=\"card-title\">${title}</div></a></li>" >> "$TMPFILE"
 done
 
-# Append closing tags
-echo \
-'    </ul>
-</body>
+echo "<!-- RECIPES:END -->" >> "$TMPFILE"
 
-</html>' >> ./index.html
+# Replace everything between the markers (inclusive) with the new content
+sed -i '' '/<!-- RECIPES:START -->/,/<!-- RECIPES:END -->/{
+    /<!-- RECIPES:START -->/{
+        r '"$TMPFILE"'
+        d
+    }
+    /<!-- RECIPES:END -->/d
+    d
+}' ./index.html
+
+rm -f "$TMPFILE"
 
 git add index.html
 
