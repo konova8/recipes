@@ -1,64 +1,240 @@
-<html>
-
-<script>
-    function searchInUL() {
-        // Declare variables
-        var input, filter, ul, li, a, i, txtValue;
-        input = document.getElementById("inputElement");
-        filter = input.value.toUpperCase();
-        ul = document.getElementById("listRecipes");
-        li = ul.getElementsByTagName("li");
-
-        // Loop through all list items, and hide those who dont match the search query
-        for (i = 0; i < li.length; i++) {
-            a = li[i].getElementsByTagName("a")[0];
-            txtValue = a.textContent || a.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                li[i].style.display = "";
-            } else {
-                li[i].style.display = "none";
-            }
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Mie Ricette</title>
+    <style>
+        :root {
+            --bg: #f5f0eb;
+            --surface: #ffffff;
+            --text: #2c2c2c;
+            --text-secondary: #666666;
+            --border: #e0d6cc;
+            --accent: #c0713a;
+            --accent-hover: #a85e2e;
+            --search-bg: #ffffff;
+            --shadow: rgba(0, 0, 0, 0.06);
         }
-    }
-</script>
 
+        [data-theme="dark"] {
+            --bg: #1a1a1a;
+            --surface: #2a2a2a;
+            --text: #e8e0d8;
+            --text-secondary: #a09890;
+            --border: #3a3a3a;
+            --accent: #d4894a;
+            --accent-hover: #e09a5c;
+            --search-bg: #2a2a2a;
+            --shadow: rgba(0, 0, 0, 0.2);
+        }
 
-<style>
-    #inputElement {
-        width: 100%;
-        font-size: 16px;
-        padding: 10px;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    #listRecipes {
-        font-size: 18px;
-        margin: 0;
-        padding: 0;
-        text-align: center;
-    }
-</style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            transition: background 0.3s, color 0.3s;
+            min-height: 100vh;
+        }
 
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        header p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            align-items: center;
+        }
+
+        #searchInput {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--search-bg);
+            color: var(--text);
+            outline: none;
+            transition: border-color 0.2s, background 0.3s;
+        }
+
+        #searchInput:focus {
+            border-color: var(--accent);
+        }
+
+        #searchInput::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .theme-toggle {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.7rem;
+            cursor: pointer;
+            font-size: 1.25rem;
+            line-height: 1;
+            transition: background 0.3s, border-color 0.3s;
+            color: var(--text);
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            list-style: none;
+        }
+
+        .grid li {
+            display: block;
+        }
+
+        .grid li.hidden {
+            display: none;
+        }
+
+        .card {
+            display: flex; flex-direction: column; height: 100%;
+            background: var(--surface); border: 1px solid var(--border);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            text-decoration: none;
+            color: var(--text);
+            transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s, background 0.3s;
+            box-shadow: 0 1px 3px var(--shadow);
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow);
+            border-color: var(--accent);
+        }
+
+        .card-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            text-transform: capitalize;
+        }
+
+        .count {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-top: 1.5rem;
+        }
+
+        @media (max-width: 500px) {
+            .container { padding: 1.25rem 0.75rem; }
+            header h1 { font-size: 1.5rem; }
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
 <body>
-    <input type="text" id="inputElement" onkeyup="searchInUL()" placeholder="Search for names..">
-    <ul id="listRecipes">
-        <li><a href="./ceci-al-curry">ceci-al-curry</a></li>
-        <li><a href="./chips-bucce">chips-bucce</a></li>
-        <li><a href="./crescenta-nonna-lella">crescenta-nonna-lella</a></li>
-        <li><a href="./gnocchi-alla-romana">gnocchi-alla-romana</a></li>
-        <li><a href="./pancake-grano-saraceno">pancake-grano-saraceno</a></li>
-        <li><a href="./patate-arrosto-scientifiche">patate-arrosto-scientifiche</a></li>
-        <li><a href="./polpette-spinaci-ceci-scamorza">polpette-spinaci-ceci-scamorza</a></li>
-        <li><a href="./porridge-giulia">porridge-giulia</a></li>
-        <li><a href="./rotolo-di-ricotta-e-spinaci">rotolo-di-ricotta-e-spinaci</a></li>
-        <li><a href="./spaghetti-all-assassina">spaghetti-all-assassina</a></li>
-        <li><a href="./taralli-cipolla">taralli-cipolla</a></li>
-        <li><a href="./tarte-tatin-con-pomodorini-caramellati-e-burrata">tarte-tatin-con-pomodorini-caramellati-e-burrata</a></li>
-        <li><a href="./torta-mele-cioccolata-frigo">torta-mele-cioccolata-frigo</a></li>
-        <li><a href="./tortino-al-cioccolato">tortino-al-cioccolato</a></li>
-        <li><a href="./triangoli-pasta-fillo">triangoli-pasta-fillo</a></li>
-        <li><a href="./zucca-al-forno">zucca-al-forno</a></li>
-        <li><a href="./zucca-e-cipolla-al-forno">zucca-e-cipolla-al-forno</a></li>
-    </ul>
-</body>
+    <div class="container">
+        <header>
+            <h1>🍝 Le Mie Ricette</h1>
+            <p>La mia collezione di ricette</p>
+        </header>
+        <div class="toolbar">
+            <input type="text" id="searchInput" placeholder="Cerca una ricetta..." aria-label="Cerca una ricetta">
+            <button class="theme-toggle" id="themeToggle" aria-label="Cambia tema">🌙</button>
+        </div>
+        <ul class="grid" id="recipeGrid">
+<!-- RECIPES:START -->
+            <li><a class="card" href="./ceci-al-curry"><div class="card-icon">🍲</div><div class="card-title">ceci al curry</div></a></li>
+            <li><a class="card" href="./chips-bucce"><div class="card-icon">🍲</div><div class="card-title">chips bucce</div></a></li>
+            <li><a class="card" href="./crescenta-nonna-lella"><div class="card-icon">🍲</div><div class="card-title">crescenta nonna lella</div></a></li>
+            <li><a class="card" href="./gnocchi-alla-romana"><div class="card-icon">🍲</div><div class="card-title">gnocchi alla romana</div></a></li>
+            <li><a class="card" href="./pancake-grano-saraceno"><div class="card-icon">🍲</div><div class="card-title">pancake grano saraceno</div></a></li>
+            <li><a class="card" href="./patate-arrosto-scientifiche"><div class="card-icon">🍲</div><div class="card-title">patate arrosto scientifiche</div></a></li>
+            <li><a class="card" href="./polpette-spinaci-ceci-scamorza"><div class="card-icon">🍲</div><div class="card-title">polpette spinaci ceci scamorza</div></a></li>
+            <li><a class="card" href="./porridge-giulia"><div class="card-icon">🍲</div><div class="card-title">porridge giulia</div></a></li>
+            <li><a class="card" href="./rotolo-di-ricotta-e-spinaci"><div class="card-icon">🍲</div><div class="card-title">rotolo di ricotta e spinaci</div></a></li>
+            <li><a class="card" href="./spaghetti-all-assassina"><div class="card-icon">🍲</div><div class="card-title">spaghetti all assassina</div></a></li>
+            <li><a class="card" href="./taralli-cipolla"><div class="card-icon">🍲</div><div class="card-title">taralli cipolla</div></a></li>
+            <li><a class="card" href="./tarte-tatin-con-pomodorini-caramellati-e-burrata"><div class="card-icon">🍲</div><div class="card-title">tarte tatin con pomodorini caramellati e burrata</div></a></li>
+            <li><a class="card" href="./torta-mele-cioccolata-frigo"><div class="card-icon">🍲</div><div class="card-title">torta mele cioccolata frigo</div></a></li>
+            <li><a class="card" href="./tortino-al-cioccolato"><div class="card-icon">🍲</div><div class="card-title">tortino al cioccolato</div></a></li>
+            <li><a class="card" href="./triangoli-pasta-fillo"><div class="card-icon">🍲</div><div class="card-title">triangoli pasta fillo</div></a></li>
+            <li><a class="card" href="./zucca-al-forno"><div class="card-icon">🍲</div><div class="card-title">zucca al forno</div></a></li>
+            <li><a class="card" href="./zucca-e-cipolla-al-forno"><div class="card-icon">🍲</div><div class="card-title">zucca e cipolla al forno</div></a></li>
+<!-- RECIPES:END -->
+        </ul>
+        <div class="count" id="recipeCount"></div>
+    </div>
+    <script>
+        // Theme toggle
+        const toggle = document.getElementById('themeToggle');
+        const stored = localStorage.getItem('theme');
+        if (stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            toggle.textContent = '☀️';
+        }
+        toggle.addEventListener('click', () => {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            toggle.textContent = isDark ? '🌙' : '☀️';
+            localStorage.setItem('theme', isDark ? 'light' : 'dark');
+        });
 
+        // Search
+        const input = document.getElementById('searchInput');
+        const items = document.querySelectorAll('#recipeGrid li');
+        const countEl = document.getElementById('recipeCount');
+
+        function updateCount() {
+            const visible = document.querySelectorAll('#recipeGrid li:not(.hidden)').length;
+            countEl.textContent = visible + ' ricett' + (visible === 1 ? 'a' : 'e');
+        }
+
+        input.addEventListener('input', () => {
+            const q = input.value.toUpperCase();
+            items.forEach(li => {
+                const title = li.querySelector('.card-title').textContent.toUpperCase();
+                li.classList.toggle('hidden', title.indexOf(q) === -1);
+            });
+            updateCount();
+        });
+
+        updateCount();
+    </script>
+</body>
 </html>
