@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -124,8 +125,11 @@
         }
 
         .card {
-            display: flex; flex-direction: column; height: 100%;
-            background: var(--surface); border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            background: var(--surface);
+            border: 1px solid var(--border);
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 10px;
@@ -161,12 +165,21 @@
         }
 
         @media (max-width: 500px) {
-            .container { padding: 1.25rem 0.75rem; }
-            header h1 { font-size: 1.5rem; }
-            .grid { grid-template-columns: 1fr; }
+            .container {
+                padding: 1.25rem 0.75rem;
+            }
+
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <header>
@@ -178,25 +191,80 @@
             <button class="theme-toggle" id="themeToggle" aria-label="Cambia tema">🌙</button>
         </div>
         <ul class="grid" id="recipeGrid">
-<!-- RECIPES:START -->
-            <li><a class="card" href="./ceci-al-curry"><div class="card-icon">🍲</div><div class="card-title">ceci al curry</div></a></li>
-            <li><a class="card" href="./chips-bucce"><div class="card-icon">🍲</div><div class="card-title">chips bucce</div></a></li>
-            <li><a class="card" href="./crescenta-nonna-lella"><div class="card-icon">🍲</div><div class="card-title">crescenta nonna lella</div></a></li>
-            <li><a class="card" href="./gnocchi-alla-romana"><div class="card-icon">🍲</div><div class="card-title">gnocchi alla romana</div></a></li>
-            <li><a class="card" href="./pancake-grano-saraceno"><div class="card-icon">🍲</div><div class="card-title">pancake grano saraceno</div></a></li>
-            <li><a class="card" href="./patate-arrosto-scientifiche"><div class="card-icon">🍲</div><div class="card-title">patate arrosto scientifiche</div></a></li>
-            <li><a class="card" href="./polpette-spinaci-ceci-scamorza"><div class="card-icon">🍲</div><div class="card-title">polpette spinaci ceci scamorza</div></a></li>
-            <li><a class="card" href="./porridge-giulia"><div class="card-icon">🍲</div><div class="card-title">porridge giulia</div></a></li>
-            <li><a class="card" href="./rotolo-di-ricotta-e-spinaci"><div class="card-icon">🍲</div><div class="card-title">rotolo di ricotta e spinaci</div></a></li>
-            <li><a class="card" href="./spaghetti-all-assassina"><div class="card-icon">🍲</div><div class="card-title">spaghetti all assassina</div></a></li>
-            <li><a class="card" href="./taralli-cipolla"><div class="card-icon">🍲</div><div class="card-title">taralli cipolla</div></a></li>
-            <li><a class="card" href="./tarte-tatin-con-pomodorini-caramellati-e-burrata"><div class="card-icon">🍲</div><div class="card-title">tarte tatin con pomodorini caramellati e burrata</div></a></li>
-            <li><a class="card" href="./torta-mele-cioccolata-frigo"><div class="card-icon">🍲</div><div class="card-title">torta mele cioccolata frigo</div></a></li>
-            <li><a class="card" href="./tortino-al-cioccolato"><div class="card-icon">🍲</div><div class="card-title">tortino al cioccolato</div></a></li>
-            <li><a class="card" href="./triangoli-pasta-fillo"><div class="card-icon">🍲</div><div class="card-title">triangoli pasta fillo</div></a></li>
-            <li><a class="card" href="./zucca-al-forno"><div class="card-icon">🍲</div><div class="card-title">zucca al forno</div></a></li>
-            <li><a class="card" href="./zucca-e-cipolla-al-forno"><div class="card-icon">🍲</div><div class="card-title">zucca e cipolla al forno</div></a></li>
-<!-- RECIPES:END -->
+            <!-- RECIPES:START -->
+            <li><a class="card" href="./ceci-al-curry">
+                    <div class="card-icon">🍲</div>
+                    <div class="card-title">ceci al curry</div>
+                </a></li>
+            <li><a class="card" href="./chips-bucce">
+                    <div class="card-icon">🍲</div>
+                    <div class="card-title">chips bucce</div>
+                </a></li>
+            <li><a class="card" href="./crescenta-nonna-lella">
+                    <div class="card-icon">🍲</div>
+                    <div class="card-title">crescenta nonna lella</div>
+                </a></li>
+            <li><a class="card" href="./gnocchi-alla-romana">
+                    <div class="card-icon">🍲</div>
+                    <div class="card-title">gnocchi alla romana</div>
+                </a></li>
+            <li><a class="card" href="./pancake-grano-saraceno">
+                    <div class="card-icon">🍲</div>
+                    <div class="card-title">pancake grano saraceno</div>
+                </a></li>
+            <li><a class="card" href="./patate-arrosto-scientifiche">
+                    <div class="card-icon">🍲</div>
+                    <div class="card-title">patate arrosto scientifiche</div>
+                </a></li>
+            <li><a class="card" href="./polpette-spinaci-ceci-scamorza">
+                    <div class="card-icon">🍲</div>
+                    <div class="card-title">polpette spinaci ceci scamorza</div>
+                </a></li>
+            <li><a class="card" href="./porridge-giulia">
+                    <div class="card-icon">🍲</div>
+                    <div class="card-title">porridge giulia</div>
+                </a></li>
+            <li><a class="card" href="./rotolo-di-ricotta-e-spinaci">
+                    <div class="card-icon">🍲</div>
+                    <div class="card-title">rotolo di ricotta e spinaci</div>
+                </a></li>
+            <li><a class="card" href="./spaghetti-all-assassina">
+                    <div class="card-icon">🍲</div>
+                    <div class="card-title">spaghetti all assassina</div>
+                </a></li>
+            <li><a class="card" href="./taralli-cipolla">
+                    <div class="card-icon">🍲</div>
+                    <div class="card-title">taralli cipolla</div>
+                </a></li>
+            <li><a class="card" href="./tarte-tatin-con-pomodorini-caramellati-e-burrata">
+                    <div class="card-icon">🍲</div>
+                    <div class="card-title">tarte tatin con pomodorini caramellati e burrata</div>
+                </a></li>
+            <li><a class="card" href="./torta-mele-cioccolata-frigo">
+                    <div class="card-icon">🍲</div>
+                    <div class="card-title">torta mele cioccolata frigo</div>
+                </a></li>
+            <li><a class="card" href="./tortino-al-cioccolato">
+                    <div class="card-icon">🍲</div>
+                    <div class="card-title">tortino al cioccolato</div>
+                </a></li>
+            <li><a class="card" href="./triangoli-pasta-fillo">
+                    <div class="card-icon">🍲</div>
+                    <div class="card-title">triangoli pasta fillo</div>
+                </a></li>
+            <li><a class="card" href="./zucca-al-forno">
+                    <div class="card-icon">🍲</div>
+                    <div class="card-title">zucca al forno</div>
+                </a></li>
+            <li><a class="card" href="./zucca-e-cipolla-al-forno">
+                    <div class="card-icon">🍲</div>
+                    <div class="card-title">zucca e cipolla al forno</div>
+                </a></li>
+            <li><a class="card" href="./zuppa-di-cipolle-bacchilega">
+                    <div class="card-icon">🍲</div>
+                    <div class="card-title">zuppa di cipolle bacchilega</div>
+                </a></li>
+            <!-- RECIPES:END -->
         </ul>
         <div class="count" id="recipeCount"></div>
     </div>
@@ -237,4 +305,5 @@
         updateCount();
     </script>
 </body>
+
 </html>
